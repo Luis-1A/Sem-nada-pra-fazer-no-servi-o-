@@ -2,20 +2,27 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lista de Capinhas por iPhone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capinhas por iPhone</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>📱 Capinhas por Modelo de iPhone</h1>
-    <p>Clique em um modelo para ver os detalhes</p>
+    <h1>📱 Capinhas por Modelo</h1>
+    <p>Total em estoque: <span id="totalCapinhas">0</span></p>
+    <input type="text" id="busca" placeholder="🔍 Buscar modelo..." />
+    <button id="surpresa">🎲 Surpreenda-me</button>
+    <label class="filtro-label">
+      Mostrar modelos com no mínimo
+      <input type="number" id="filtroQtd" min="0" value="0" />
+      capinhas
+    </label>
   </header>
 
   <main id="lista-modelos"></main>
 
   <footer>
-    <p>&copy; 2025 - Estoque de Capinhas</p>
+    <p>&copy; 2025 Estoque de Capinhas</p>
   </footer>
 
   <script src="script.js"></script>
