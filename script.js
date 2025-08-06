@@ -29,22 +29,76 @@ const dados = [
 ];
 
 const container = document.getElementById("lista-modelos");
+const totalSpan = document.getElementById("totalCapinhas");
+const inputBusca = document.getElementById("busca");
+const inputFiltro = document.getElementById("filtroQtd");
+const btnSurpresa = document.getElementById("surpresa");
 
-dados.forEach((item) => {
+function calcularTotal(lista) {
+  return lista.reduce((acc, item) => acc + item.masc + item.fem, 0);
+}
+
+function criarCard(item) {
   const card = document.createElement("div");
   card.classList.add("card");
+
+  const total = item.masc + item.fem;
 
   card.innerHTML = `
     <h2>${item.modelo}</h2>
     <div class="detalhes">
       <p>📦 Masculinas: <strong>${item.masc}</strong></p>
       <p>🎀 Femininas: <strong>${item.fem}</strong></p>
+      <p>📊 Total: <strong>${total}</strong></p>
     </div>
   `;
 
   card.addEventListener("click", () => {
     card.classList.toggle("mostrar");
+    card.style.backgroundColor = card.classList.contains("mostrar") ? "#f1f8e9" : "#fff";
   });
 
-  container.appendChild(card);
-});
+  return card;
+}
+
+function atualizarLista() {
+  container.innerHTML = "";
+
+  const busca = inputBusca.value.toLowerCase();
+  const minQtd = parseInt(inputFiltro.value) || 0;
+
+  const filtrados = dados.filter(item => {
+    const nomeMatch = item.modelo.toLowerCase().includes(busca);
+    const qtd = item.masc + item.fem;
+    return nomeMatch && qtd >= minQtd;
+  });
+
+  filtrados.forEach(item => {
+    const card = criarCard(item);
+    container.appendChild(card);
+  });
+
+  totalSpan.innerText = calcularTotal(filtrados);
+}
+
+function destacarAleatorio() {
+  const cards = container.querySelectorAll(".card");
+  if (cards.length === 0) return;
+
+  const aleatorio = Math.floor(Math.random() * cards.length);
+  cards.forEach((c, i) => {
+    c.classList.remove("mostrar");
+    c.style.backgroundColor = "#fff";
+    if (i === aleatorio) {
+      c.classList.add("mostrar");
+      c.style.backgroundColor = "#ffecb3";
+      c.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  });
+}
+
+inputBusca.addEventListener("input", atualizarLista);
+inputFiltro.addEventListener("input", atualizarLista);
+btnSurpresa.addEventListener("click", destacarAleatorio);
+
+atualizarLista(); // inicia a lista
