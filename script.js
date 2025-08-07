@@ -16,7 +16,7 @@ const dados = [
   { modelo: "iPhone 13 mini", masc: 0, fem: 4 },
   { modelo: "iPhone 14", masc: 2, fem: 3 },
   { modelo: "iPhone 14 Max", masc: 2, fem: 3 },
-  { modelo: "iPhone 14 Pro", masc: 1, fem: 0 },
+  { modelo: "iPhone 14 Pro", masc: 1, fem: 3 },
   { modelo: "iPhone 14 Pro Max", masc: 8, fem: 5 },
   { modelo: "iPhone 15", masc: 9, fem: 4 },
   { modelo: "iPhone 15 Plus", masc: 1, fem: 0 },
